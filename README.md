@@ -11,4 +11,4 @@
 
 <span style="font-size:12px">Cette presentation sera faitte par <b>Bassem.A.Alameddine</b> dans le cours du smb214</span>
 
-Ensseigner par <b>Dr.</b>Pascal Fares
+Ensseigner par <b>Dr.Pascal Fares</b>
