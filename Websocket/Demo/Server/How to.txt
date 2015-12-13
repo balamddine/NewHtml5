@@ -1,0 +1,30 @@
+le server est ecrit en C# language 
+
+Step 1 
+-------
+TcpListener(System.Net.IPAddress localaddr,int port)
+
+Methods Start()
+
+Initialiser un TCPlistener qui entent les connextion sur l'IP Port specifier 
+
+la Methode Start () fait activer le listener 
+----------------------------------
+Step 2
+-------
+TCPclient 
+
+TcpClient client = server.AcceptTcpClient();
+
+accepter une connextion du server et activer une connextion entre le client et le serveur 
+
+-------------------------------
+Step 3 
+-------
+NetworkStream 
+
+Method :
+	o Write(Byte[] buffer,int offset, int size)
+	o Read (Byte [] buffer ,int offset,int size)
+le Network stream manipule le flot des messages entre client et serveur et il admet 2 methods
+Write et read ou write pour ecrire et read pour lire 
