@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+	
+      <script type="text/javascript">
+         function WebSocketTest()
+         {
+		 var dv_msg=document.getElementById("dv_msg")
+            if ("WebSocket" in window)
+            {
+			dv_msg.style.color="#65b042";
+               dv_msg.innerHTML="WebSocket is supported by your Browser!";
+               
+               // Let us open a web socket
+               var ws = new WebSocket("ws://localhost:9998/echo");
+				
+               ws.onopen = function()
+               {
+			   dv_msg.innerHTML="You are now connected !";
+                  // Web Socket is connected, send data using send()
+                  ws.send("Message to send");
+                 dv_msg.innerHTML="Message is sent...";
+               };
+				
+               ws.onmessage = function (evt) 
+               { 
+                  var received_msg = evt.data;
+                  dv_msg.innerHTML = "Message is received... : " + received_msg;
+               };
+				
+               ws.onclose = function()
+               { 
+                  // websocket is closed.
+				  dv_msg.style.color="red";
+                  dv_msg.innerHTML="Connection is closed...the server may be down "; 
+               };
+            }
+            
+            else
+            {
+               // The browser doesn't support WebSocket
+               dv_msg.innerHTML="WebSocket NOT supported by your Browser!";
+            }
+         }
+      </script>
+		
+   </head>
+   <body>
+   
+      <div id="sse">
+         <a href="javascript:WebSocketTest()">Run WebSocket</a>
+      </div>
+      <div id="dv_msg" ></div>
+   </body>
+</html>
