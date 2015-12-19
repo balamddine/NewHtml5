@@ -4,3 +4,6 @@ D:\Projects\SMB214\Neauvoter de HTML5\Websocket\Demo\websocket server example\We
 D:\Projects\SMB214\Neauvoter de HTML5\Websocket\Demo\websocket server example\WebSocketServer\WebSocketServer\obj\Debug\WebSocketServer.csprojResolveAssemblyReference.cache
 D:\Projects\SMB214\Neauvoter de HTML5\Websocket\Demo\websocket server example\WebSocketServer\WebSocketServer\obj\Debug\WebSocketServer.exe
 D:\Projects\SMB214\Neauvoter de HTML5\Websocket\Demo\websocket server example\WebSocketServer\WebSocketServer\obj\Debug\WebSocketServer.pdb
+D:\Projects\SMB214\Neauvoter de HTML5\Websocket\Demo\Server\WebSocketServer\WebSocketServer\bin\Debug\WebSocketServer.exe.config
+D:\Projects\SMB214\Neauvoter de HTML5\Websocket\Demo\Server\WebSocketServer\WebSocketServer\obj\Debug\WebSocketServer.exe
+D:\Projects\SMB214\Neauvoter de HTML5\Websocket\Demo\Server\WebSocketServer\WebSocketServer\obj\Debug\WebSocketServer.pdb
