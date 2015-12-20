@@ -12,7 +12,7 @@ namespace WebSocketServer
         {
             Server s = new Server();
             s.Start();
-            Console.Read();
+            //Console.Read();
         }
     }
 }
