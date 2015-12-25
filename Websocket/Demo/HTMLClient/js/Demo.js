@@ -1,14 +1,13 @@
 ﻿$(document).ready(function () {
-    var dvinfo = $("#dvinfo");
+    var dvinfo = $("#dv_info");
     var dv_msg = $("#dv_msg");
     var txtSend = $("#txtSend");
     var btnSend = $("#btnsend");
-    var spinfo = $("#spinfo");
+    var toAppend = "<div class='alert alert-info' ><span class='glyphicon glyphicon-warning-sign'></span>&nbsp;<span>@APPEND</span></div>";
     if ("WebSocket" in window) {
         dv_msg.removeClass("alert-danger");
         dv_msg.toggleClass("alert alert-success");
-        dv_msg.html("<span class='glyphicon glyphicon-ok' ></span>&nbsp;&nbsp;WebSocket is supported by your Browser!<br><br><span style='font-size:12px'>Connecting</span>");
-        dvinfo.hide();
+        dv_msg.html("<span class='glyphicon glyphicon-ok' ></span>&nbsp;&nbsp;WebSocket is supported by your Browser!<br><br><span style='font-size:12px'>Connecting...</span>");
         // Let us open a web socket
         var ws = new WebSocket("ws://localhost:9998/echo","echo-protocol");
         
@@ -16,16 +15,12 @@
             dv_msg.removeClass("alert-danger");
             dv_msg.addClass("alert alert-success");
             dv_msg.html("<span class='glyphicon glyphicon-ok' ></span>&nbsp;&nbsp;You are now connected to server You can send a msg now!");
-
-            // Web Socket is connected, send data using send()
-           // ws.send("Hi From client");
-            //dv_msg.html ("Message is sent...");
         };
 
         ws.onmessage = function (evt) {
             var received_msg = evt.data;
-            dvinfo.show();
-            spinfo.html("Message is received... : " + received_msg);
+            dvinfo.append(toAppend.replace("@APPEND", "Server : " + received_msg));
+           
         };
         // Handle any errors that occur.
         ws.onerror = function (error) {
@@ -37,7 +32,7 @@
             // websocket is closed.
             dv_msg.removeClass("alert-success");
             dv_msg.addClass("alert alert-danger");
-            dv_msg.html("<span class='glyphicon glyphicon-remove' ></span>&nbsp;&nbsp;Connection is closed...you are disconnected ! please try again later");
+            dv_msg.html("<span class='glyphicon glyphicon-remove' ></span>&nbsp;&nbsp;Connection is lost, server may be down  ! <br/><br/><a style='cursor:pointer;color:#A94442' href='javascript:window.location.reload(true);'><span class='glyphicon glyphicon-refresh'></span>&nbsp;<span style='font-size:12px'>Retry</span></a>");
             
         };
     }
@@ -53,8 +48,6 @@
         txtSend.val();
         ws.send(txtSend.val());
         txtSend.val("");
-       
-      
     });
-
+    
 });

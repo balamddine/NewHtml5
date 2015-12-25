@@ -17,7 +17,8 @@ class Server
     public void Start ()
     {
         server.Start();
-        Console.WriteLine("Server has started on "+SERVER_IP+":"+SERVER_PORT+".{0}Waiting for a connection...", Environment.NewLine);
+        Console.WriteLine("Initializing Server on "+SERVER_IP+":"+SERVER_PORT+".");
+        Console.WriteLine("{0}Waiting for a connection...", Environment.NewLine);
         TcpClient client;
         while (true) // Add your exit flag here
         {
@@ -57,6 +58,7 @@ class Server
 
             if (new Regex("^GET").IsMatch(data)) // Handshaking protocol
             {
+
                 Byte[] response = Encoding.UTF8.GetBytes("HTTP/1.1 101 Switching Protocols" + Environment.NewLine
                     + "Connection: Upgrade" + Environment.NewLine
                     + "Upgrade: websocket" + Environment.NewLine
@@ -70,16 +72,16 @@ class Server
                     + Environment.NewLine);
 
                 stream.Write(response, 0, response.Length);
-                
+                Console.WriteLine("Handchaking completed.");
             }
             else
             {
                 string msg = DecodeMessage(bytes);
-                Console.WriteLine(msg);
+                Console.WriteLine("Client : "+msg);
                 stream.Write(bytes, 0, bytes.Length);
-                client.Close();
-                server.Stop();
-                break;
+               // client.Close();
+                //server.Stop();
+              //  break;
               //  stream.Read(srvMsg, 0, srvMsg.Length);
              //   stream.Write(srvMsg, 0, srvMsg.Length);
                
