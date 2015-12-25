@@ -8,10 +8,14 @@
         dv_msg.removeClass("alert-danger");
         dv_msg.toggleClass("alert alert-success");
         dv_msg.html("<span class='glyphicon glyphicon-ok' ></span>&nbsp;&nbsp;WebSocket is supported by your Browser!<br><br><span style='font-size:12px'>Connecting...</span>");
+        txtSend.prop('disabled', true);
+        btnSend.prop('disabled', true);
         // Let us open a web socket
         var ws = new WebSocket("ws://localhost:9998/echo","echo-protocol");
         
         ws.onopen = function (event) {
+            txtSend.prop('disabled', false);
+            btnSend.prop('disabled', false);
             dv_msg.removeClass("alert-danger");
             dv_msg.addClass("alert alert-success");
             dv_msg.html("<span class='glyphicon glyphicon-ok' ></span>&nbsp;&nbsp;You are now connected to server You can send a msg now!");
