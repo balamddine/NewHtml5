@@ -1,0 +1,101 @@
+﻿.Connected {
+color: #4862A3;
+}
+
+.Info {
+width: 400px;
+}
+
+.Info ul {
+width: 100%;
+list-style-type: none;
+}
+
+.inline{
+display: inline;
+}
+.dvfriends {
+background-color: #f8f8f8;
+border-left: 2px solid #f8f8f8;
+float: right;
+margin: 0 !important;
+min-height: 100%;
+overflow: hidden;
+padding: 0 !important;
+position: fixed;
+right: 0;
+}
+.dvfriends ul {
+list-style-type: none;
+margin: 10px;
+padding:0px;
+width: 100%;
+}
+.dvfriends ul li {
+cursor: pointer;
+font-size: 13px;
+padding: 6px 10px 10px 16px;
+text-decoration: none;
+width: 100%;
+text-align:left;
+vertical-align:middle
+}
+.dvfriends ul li:hover {
+background-color:#DCDEE3;
+}
+.dvfriends ul li a{
+text-decoration:none;
+color:#333;
+}
+.dvfriends ul li a:hover{
+text-transform:none;
+}
+
+.navbar {
+margin-bottom:0px !important;
+}
+
+.fullHeight {
+    height:100%;
+}
+.dvchatWrapper{
+position:fixed;
+bottom:0px; 
+height: 45%;
+
+}
+.dvchatscontainer {
+background-color: #f8f8f8;
+margin-left: 10px !important;
+min-height: 45%;
+overflow: hidden;
+padding: 0 !important;
+float:right;
+box-shadow:0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.nodistance {
+margin:0px !important;
+padding:0px !important;
+}
+.txtinput {
+border:none;
+box-shadow:none;
+margin:0px;
+}
+.txtinput:focus {
+box-shadow:none;
+}
+.chathead {
+    min-height:10%;
+    background-color:#7AC28A;
+}
+.chatbody {
+    min-height:70%;
+}
+
+.chatfooter {
+min-height:20%;
+background-color:white;
+
+}
