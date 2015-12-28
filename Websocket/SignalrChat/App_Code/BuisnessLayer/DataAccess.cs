@@ -10,7 +10,12 @@ using System.Web;
 /// </summary>
 public class DataAccess
 {
-    string ConnectionString = ConfigurationManager.ConnectionStrings["conn"].ToString();
+    string ConnectionString;
+    public DataAccess(string conn)
+    {
+        ConnectionString = conn;
+    }
+
 
     #region Users
 
@@ -23,17 +28,22 @@ public class DataAccess
         SqlDataReader rdr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
         return rdr;
     }
+
+
+
     public SqlDataReader GetUserByEmail(string Email)
     {
         string query = "select * from Users where Email=@Email";
         SqlConnection con = new SqlConnection(ConnectionString);
         con.Open();
-        SqlCommand cmd = new SqlCommand(query,con);
-        cmd.Parameters.Add(new SqlParameter("@Email",Email));
+        SqlCommand cmd = new SqlCommand(query, con);
+        cmd.Parameters.Add(new SqlParameter("@Email", Email));
         SqlDataReader rdr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-      
+
         return rdr;
     }
+
+
 
     public SqlDataReader GetUserByID(long ID)
     {
@@ -55,11 +65,13 @@ public class DataAccess
         SqlCommand cmd = new SqlCommand(query, con);
         cmd.Parameters.Add(new SqlParameter("@ID", ID));
         SqlDataReader rdr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-       
+
         return rdr;
     }
 
-    public void UpdateUserContext(long ID,string ContextID)
+   
+
+    public void UpdateUserContext(long ID, string ContextID)
     {
         string query = "update users set ContextID=@ContextID , LastConnected=@LastConnected where ID=@ID";
         SqlConnection con = new SqlConnection(ConnectionString);
@@ -74,6 +86,37 @@ public class DataAccess
 
     #endregion
 
-
+    #region Messages
+    public SqlDataReader GetAllMessages()
+    {
+        string query = "select * from messages";
+        SqlConnection con = new SqlConnection(ConnectionString);
+        con.Open();
+        SqlCommand cmd = new SqlCommand(query);
+        SqlDataReader rdr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+        return rdr;
+    }
+    public SqlDataReader GetMessageByID(long ID)
+    {
+        string query = "select * from messages where ID = @ID";
+        SqlConnection con = new SqlConnection(ConnectionString);
+        con.Open();
+        SqlCommand cmd = new SqlCommand(query, con);
+        cmd.Parameters.Add(new SqlParameter("@ID", ID));
+        SqlDataReader rdr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+        return rdr;
+    }
+    public SqlDataReader GetMessagesByPaging(long pagesize, long startindex)
+    {
+        string query = "SELECT * FROM messages ORDER BY ID OFFSET @startindex ROWS FETCH NEXT @pagesize ROWS ONLY";
+        SqlConnection con = new SqlConnection(ConnectionString);
+        con.Open();
+        SqlCommand cmd = new SqlCommand(query, con);
+        cmd.Parameters.Add(new SqlParameter("@startindex", startindex));
+        cmd.Parameters.Add(new SqlParameter("@pagesize", pagesize));
+        SqlDataReader rdr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+        return rdr;
+    }
+    #endregion
 
 }

@@ -1,6 +1,14 @@
 ﻿var ChatToAppend = " <div id='chat_@ID' class='col-lg-3 col-lg-offset-10 dvchatscontainer fullHeight'>"
-                              + "<div class='col-lg-12 chathead nodistance'>@CHAT_HEAD</div>"
-                              + "<div class='col-lg-12 chatbody nodistance'>@CHAT_BODY</div>"
+                              + "<div class='col-lg-12 chathead nodistance'>"
+                              +"<ul class='list-inline' >"
+                              + "<li>"
+                              + "<a href=\"javascript:CloseChat('chat_@ID');\" class=\"aclose\"></a>"
+                              + "</li>"
+                              + "</ul>"
+                              + "</div>"
+                              + "<div class='col-lg-12 chatbody nodistance'>"
+                              +"<ul class='nodistance'>@CHAT_BODY</ul>"
+                              +"</div>"
                               + "<div class='col-lg-12 chatfooter nodistance'>"
                               + "<div class='col-lg-12 nodistance'>"
                               + "<input type='text'  class='form-control input-sm txtinput' placeholder='Enter Message' id='txt_@ID' />"
@@ -60,12 +68,17 @@ window.InitChat = function (userID) {
     var chatBody = "";
     if (id.length == 0) {
         dvChatContainer.append(ChatToAppend.replace(/@ID/g, userID).replace("@CHAT_BODY", chatBody).replace("@CHAT_HEAD", chatName));
-
     }
-       
-
     var txt = $("#txt_" + userID);
     setTimeout(function () {
         txt.focus();
     }, 500);
+};
+
+window.CloseChat = function (userID) {
+    var id = $("#"+userID);
+    var dvChatContainer = $("#dvChatContainer");
+    if (id.length > 0) {
+        id.remove();
+    }
 };

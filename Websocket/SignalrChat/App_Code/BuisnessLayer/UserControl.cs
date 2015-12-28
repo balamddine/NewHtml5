@@ -14,7 +14,7 @@ public class UserControl
    {
         List<Userrs> L = new List<Userrs>();
         Userrs User = null;
-        SqlDataReader rdr = new DataAccess().GetAllUsers();
+        SqlDataReader rdr = Provider.DataAccessConcrete().GetAllUsers();
         while (rdr.Read()) {
             User = new Userrs();
             User.ID = long.Parse(rdr["ID"].ToString());
@@ -31,7 +31,7 @@ public class UserControl
     public Userrs GetUserByID(long ID)
     {
         Userrs User = new Userrs();
-        SqlDataReader rdr = new DataAccess().GetUserByID(ID);
+        SqlDataReader rdr = Provider.DataAccessConcrete().GetUserByID(ID);
         if (rdr.Read())
         {
             User = new Userrs();
@@ -50,7 +50,7 @@ public class UserControl
     {
         List<Userrs> L = new List<Userrs>();
         Userrs User = null;
-        SqlDataReader rdr = new DataAccess().GetAllFriends(ID);
+        SqlDataReader rdr = Provider.DataAccessConcrete().GetAllFriends(ID);
         while (rdr.Read())
         {
             User = new Userrs();
@@ -67,13 +67,13 @@ public class UserControl
 
     public void UpdateUserContext(Userrs user)
     {
-         new DataAccess().UpdateUserContext(user.ID,user.ContextID);
+         Provider.DataAccessConcrete().UpdateUserContext(user.ID,user.ContextID);
     }
 
     public Userrs GetUserByEmail(string Email)
     {
         Userrs User = new Userrs();
-        SqlDataReader rdr = new DataAccess().GetUserByEmail(Email);
+        SqlDataReader rdr = Provider.DataAccessConcrete().GetUserByEmail(Email);
         if(rdr.Read())
         {
             User = new Userrs();

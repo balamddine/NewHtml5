@@ -51,28 +51,52 @@
 
             </ul>
         </div>
-      
-                <div class="col-lg-10 dvchatWrapper" >
-                    <div class="row fullHeight" >
-                        <div class="col-lg-12 fullHeight" id="dvChatContainer">
-                           
-                           
+
+        <div class="col-lg-10 dvchatWrapper">
+            <div class="row fullHeight">
+                <div class="col-lg-12 fullHeight" id="dvChatContainer">
+                    <%--<div id='chat_@ID' class='col-lg-3 col-lg-offset-10 dvchatscontainer fullHeight'>
+                        <div class='col-lg-12 chathead nodistance'>
+                            <ul class="list-inline" >
+                                <li>
+                                   <a href="javascript:CloseChat('chat_@ID');" class="aclose"></a>
+                                </li>
+                            </ul>
                         </div>
-
-                    </div>
+                        <div class='col-lg-12 chatbody nodistance'>
+                            <ul class="nodistance">
+                                <li>
+                                    You : <span> hi </span>
+                                </li>
+                                <li>
+                                    bassem2 : <span> hi </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class='col-lg-12 chatfooter nodistance'>
+                            <div class='col-lg-12 nodistance'>
+                                <input type='text' class='form-control input-sm txtinput' placeholder='Enter Message' id='txt_@ID' />
+                            </div>
+                            <div class='col-lg-12 tools'></div>
+                        </div>
+                    </div>--%>
 
                 </div>
-                <div class="dvfriends col-lg-2">
-                    <ul>
-                        <asp:Repeater ID="FrdRpt" runat="server" OnItemDataBound="FrdRpt_ItemDataBound">
-                            <ItemTemplate>
-                                <li runat="server" id="lifriend"><a href="javascript:void(0)">
-                                    <asp:Literal ID="litName" runat="server"></asp:Literal></a></li>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </ul>
-                </div>
-          
+
+            </div>
+
+        </div>
+        <div class="dvfriends col-lg-2">
+            <ul>
+                <asp:Repeater ID="FrdRpt" runat="server" OnItemDataBound="FrdRpt_ItemDataBound">
+                    <ItemTemplate>
+                        <li runat="server" id="lifriend"><a href="javascript:void(0)">
+                            <asp:Literal ID="litName" runat="server"></asp:Literal></a></li>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </ul>
+        </div>
+
     </form>
     <script src="js/jquery-1.10.1.min.js"></script>
     <script src="js/Fancybox/jquery.fancybox.js"></script>

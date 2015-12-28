@@ -56,7 +56,7 @@ margin-bottom:0px !important;
 }
 
 .fullHeight {
-    height:100%;
+height:100%;
 }
 .dvchatWrapper{
 position:fixed;
@@ -87,13 +87,42 @@ margin:0px;
 box-shadow:none;
 }
 .chathead {
-    min-height:10%;
-    background-color:#7AC28A;
+min-height:10%;
+background-color:#7AC28A;
+}
+.chathead ul {
+width:100%;
+list-style:none;
+float:right;
+}
+.chathead ul li {
+float:right;
+margin-top: 5px;
+}
+.aclose {
+background-image: url("/css/tools.png");
+background-position: -4px -134px;
+background-repeat: no-repeat;
+background-size: auto auto;
+display: block;
+height: 21px;
+width: 21px;
+}
+.aclose:hover {
+background-position: -4px -101px;
 }
 .chatbody {
-    min-height:70%;
+min-height:70%;
 }
-
+.chatbody ul {
+width:100%;
+list-style-type:none;
+    
+}
+.chatbody ul li {
+margin-left:15px;
+margin-top:10px;
+}
 .chatfooter {
 min-height:20%;
 background-color:white;
