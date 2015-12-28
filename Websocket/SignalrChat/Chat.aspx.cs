@@ -45,7 +45,33 @@ public partial class Chat : System.Web.UI.Page
         }
         return "";
     }
-
+    [WebMethod(EnableSession = true)]
+    public static string GetchatBody(long ToId,long pageSize)
+    {
+        string html = "";
+        if (HttpContext.Current.Session["User"] != null)
+        {
+            Userrs u = (Userrs)HttpContext.Current.Session["User"];
+            MessagesControl MyMessagesCtrl = new MessagesControl();
+            List<Messages> MessagesL = new List<Messages>();
+            MessagesL= MyMessagesCtrl.GetMessagesByPaging(pageSize,0,u.ID,ToId);
+           
+            if (MessagesL.Count > 0)
+            {
+                foreach (Messages Message in MessagesL)
+                {
+                    Userrs Touser = new UserControl().GetUserByID(Message.ToID);
+                    if (Message.FromID == u.ID)
+                        html += "<li>You: " + Message.Message+"</li>";
+                    else
+                        html += "<li>"+Touser.Name + ": " + Message.Message+"</li>";
+                }
+            }
+            
+        }
+        return html;
+    }
+    
     private void FillInfo()
     {
         hfUserId.Value = MyUser.ID.ToString();

@@ -106,14 +106,16 @@ public class DataAccess
         SqlDataReader rdr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
         return rdr;
     }
-    public SqlDataReader GetMessagesByPaging(long pagesize, long startindex)
+    public SqlDataReader GetMessagesByPaging(long pagesize, long startindex,long FromID,long ToID)
     {
-        string query = "SELECT * FROM messages ORDER BY ID OFFSET @startindex ROWS FETCH NEXT @pagesize ROWS ONLY";
+        string query = "SELECT * FROM messages where (FromID=FromID and ToID=ToID or (FromID=ToID and ToID=FromID)) ORDER BY ID OFFSET @startindex ROWS FETCH NEXT @pagesize ROWS ONLY";
         SqlConnection con = new SqlConnection(ConnectionString);
         con.Open();
         SqlCommand cmd = new SqlCommand(query, con);
         cmd.Parameters.Add(new SqlParameter("@startindex", startindex));
         cmd.Parameters.Add(new SqlParameter("@pagesize", pagesize));
+        cmd.Parameters.Add(new SqlParameter("@FromID", FromID));
+        cmd.Parameters.Add(new SqlParameter("@ToID", ToID));
         SqlDataReader rdr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
         return rdr;
     }

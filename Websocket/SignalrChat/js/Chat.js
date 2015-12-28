@@ -1,6 +1,7 @@
 ﻿var ChatToAppend = " <div id='chat_@ID' class='col-lg-3 col-lg-offset-10 dvchatscontainer fullHeight'>"
                               + "<div class='col-lg-12 chathead nodistance'>"
-                              +"<ul class='list-inline' >"
+                              + "<ul class='list-inline' >"
+                              + "<li class='name'>@CHAT_HEAD</li>"
                               + "<li>"
                               + "<a href=\"javascript:CloseChat('chat_@ID');\" class=\"aclose\"></a>"
                               + "</li>"
@@ -16,12 +17,14 @@
                               + "<div class='col-lg-12 tools'></div>"
                               + "</div>"
                               + "</div>";
+var UserID = $("#hfUserId").val();
+var messagePageSize = 100;
 $(function () {
     var ainfo = $("#ainfo");
     var dvStatus = $("#dvStatus");
     var dvContextId = $("#dvContextId");
     var dvChatContainer = $("#dvChatContainer");
-    var UserID = $("#hfUserId").val();
+    
     ainfo.fancybox({ width: "500px" });
 
     // Declare a proxy to reference the hub. 
@@ -62,19 +65,38 @@ window.UpdateUserContextID = function () {
     });
 };
 window.InitChat = function (userID) {
-    var dvChatContainer = $("#dvChatContainer");
     var id = $("#chat_" + userID);
-    var chatName = "";
-    var chatBody = "";
     if (id.length == 0) {
-        dvChatContainer.append(ChatToAppend.replace(/@ID/g, userID).replace("@CHAT_BODY", chatBody).replace("@CHAT_HEAD", chatName));
+        GetchatBody(id,userID);
     }
-    var txt = $("#txt_" + userID);
+   
+};
+window.GetchatBody = function (DivID,ToId) {
+    var dvChatContainer = $("#dvChatContainer");
+    $.ajax({
+        type: 'POST',
+        url: 'Chat.aspx/GetchatBody',
+        data: '{ToId:' + ToId + ',pageSize:' + messagePageSize + '}',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            var chatName = "";
+            dvChatContainer.append(ChatToAppend.replace(/@ID/g, ToId).replace("@CHAT_BODY", data.d).replace("@CHAT_HEAD", chatName));
+           
+        },
+        error: function (xhr) {
+            alert("responseText: " + xhr.responseText);
+        }
+    });
+    var txt = $("#txt_" + ToId);
     setTimeout(function () {
+        //scrollbottom(DivID);
         txt.focus();
     }, 500);
+}
+window.scrollbottom = function (ID) {
+    ID.animate({ scrollTop: ID.prop("scrollHeight") }, 1000);
 };
-
 window.CloseChat = function (userID) {
     var id = $("#"+userID);
     var dvChatContainer = $("#dvChatContainer");

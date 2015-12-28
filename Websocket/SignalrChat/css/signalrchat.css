@@ -99,6 +99,9 @@ float:right;
 float:right;
 margin-top: 5px;
 }
+.name {
+float:left;
+}
 .aclose {
 background-image: url("/css/tools.png");
 background-position: -4px -134px;
@@ -112,7 +115,9 @@ width: 21px;
 background-position: -4px -101px;
 }
 .chatbody {
-min-height:70%;
+height: 70%;
+min-height: 70%;
+overflow: auto;
 }
 .chatbody ul {
 width:100%;
