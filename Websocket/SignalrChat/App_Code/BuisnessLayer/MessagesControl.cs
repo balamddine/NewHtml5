@@ -25,6 +25,7 @@ public class MessagesControl
             Message.DateSend = DateTime.Parse(rdr["DateSend"].ToString());
             L.Add(Message);
         }
+         rdr.Close();
         return L;
    }
 
@@ -42,7 +43,7 @@ public class MessagesControl
             Message.FromID = long.Parse(rdr["FromID"].ToString());
             Message.DateSend = DateTime.Parse(rdr["DateSend"].ToString());
         }
-
+         rdr.Close();
         return Message;
     }
 
@@ -62,34 +63,8 @@ public class MessagesControl
             Message.DateSend = DateTime.Parse(rdr["DateSend"].ToString());
             L.Add(Message);
         }
+        rdr.Close();
         return L;
     }
 
-    public void UpdateUserContext(Userrs user)
-    {
-         new DataAccess().UpdateUserContext(user.ID,user.ContextID);
-    }
-
-    public Userrs GetUserByEmail(string Email)
-    {
-        Userrs User = new Userrs();
-        SqlDataReader rdr = new DataAccess().GetUserByEmail(Email);
-        if(rdr.Read())
-        {
-            User = new Userrs();
-            User.ID = long.Parse(rdr["ID"].ToString());
-            User.Name = rdr["Name"].ToString();
-            User.Status = rdr["Status"].ToString();
-            User.Email = rdr["Email"].ToString();
-            User.ContextID = rdr["ContextID"].ToString();
-            User.LastConnected = DateTime.Parse(rdr["LastConnected"].ToString());
-        }
-        
-        return User;
-    }
-
-    public void UpdateUser(Userrs user)
-    {
-        //throw new NotImplementedException();
-    }
 }
