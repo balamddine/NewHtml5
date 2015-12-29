@@ -10,7 +10,7 @@ namespace SignalRChat
     {
         public static List<Userrs> UsersL = new List<Userrs>();
         public UserControl UsrCtrl = new UserControl();
-        public void Send(string message)
+        public void sendMessage(long ToID,long FromID,string message)
         {
            
             // Call the broadcastMessage method to update clients.

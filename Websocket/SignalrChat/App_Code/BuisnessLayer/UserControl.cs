@@ -25,6 +25,7 @@ public class UserControl
             User.LastConnected = DateTime.Parse(rdr["LastConnected"].ToString());
             L.Add(User);
         }
+        rdr.Close();
         return L;
    }
 
@@ -42,7 +43,7 @@ public class UserControl
             User.ContextID = rdr["ContextID"].ToString();
             User.LastConnected = DateTime.Parse(rdr["LastConnected"].ToString());
         }
-
+         rdr.Close();
         return User;
     }
 
@@ -62,6 +63,7 @@ public class UserControl
             User.LastConnected = DateTime.Parse(rdr["LastConnected"].ToString());
             L.Add(User);
         }
+        rdr.Close();
         return L;
     }
 
@@ -84,7 +86,7 @@ public class UserControl
             User.ContextID = rdr["ContextID"].ToString();
             User.LastConnected = DateTime.Parse(rdr["LastConnected"].ToString());
         }
-        
+        rdr.Close();
         return User;
     }
 

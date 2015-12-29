@@ -12,13 +12,14 @@
                               +"</div>"
                               + "<div class='col-lg-12 chatfooter nodistance'>"
                               + "<div class='col-lg-12 nodistance'>"
-                              + "<input type='text'  class='form-control input-sm txtinput' placeholder='Enter Message' id='txt_@ID' />"
+                              + "<input type='text'  class='form-control input-sm txtinput' placeholder='Enter Message' id='txt_@ID' onkeydown='prevententer(event);' onkeyup='SendMessage(event,@ID);' />"
                               + "</div>"
                               + "<div class='col-lg-12 tools'></div>"
                               + "</div>"
                               + "</div>";
 var UserID = $("#hfUserId").val();
 var messagePageSize = 100;
+var chat;
 $(function () {
     var ainfo = $("#ainfo");
     var dvStatus = $("#dvStatus");
@@ -38,14 +39,10 @@ $(function () {
 
         chat.server.addUser(UserID);
     });
-    chat.client.broadcastMessage = function (msg) {
-        // dvinfo.append(toAppend.replace("@APPEND", "Server : " + msg));
-    }
-
 });
 
 window.UpdateUserContextID = function () {
-    var chat = $.connection.chatHub;
+    chat = $.connection.chatHub;
     var hf_contextID = $("#hf_contextID");
     var dvlastConnected = $("#dvlastConnected");
     hf_contextID.val($.connection.hub.id);
@@ -67,12 +64,46 @@ window.UpdateUserContextID = function () {
 window.InitChat = function (userID) {
     var id = $("#chat_" + userID);
     if (id.length == 0) {
-        GetchatBody(id,userID);
+        GetchatBody(userID);
     }
-   
+       
+    setTimeout(function () {
+        var txt = $("#txt_" + userID);
+       
+        txt.focus();
+    }, 50);
+    scrollbottom(id.find(".chatbody"));
 };
-window.GetchatBody = function (DivID,ToId) {
+window.prevententer = function (event) {
+    var x = event.which || event.keyCode;
+    if (x == 13) {
+        event.preventDefault();
+        return false;
+    }
+};
+window.SendMessage = function (event, ToID) {
+   
+    var txt = $("#txt_" + ToID);
+    var msg = txt.val();
+    //console.log(txt.val());
+    var x = event.which || event.keyCode;
+    var FromUserID = UserID
+    
+    if (x == 13)
+    {
+        if (msg != "")
+        {
+            chat.server.sendMessage(FromUserID,ToID,msg)
+        }
+        event.preventDefault();
+        return false;
+        
+    }
+
+};
+window.GetchatBody = function (ToId) {
     var dvChatContainer = $("#dvChatContainer");
+   
     $.ajax({
         type: 'POST',
         url: 'Chat.aspx/GetchatBody',
@@ -88,14 +119,13 @@ window.GetchatBody = function (DivID,ToId) {
             alert("responseText: " + xhr.responseText);
         }
     });
-    var txt = $("#txt_" + ToId);
-    setTimeout(function () {
-        //scrollbottom(DivID);
-        txt.focus();
-    }, 500);
+   
 }
 window.scrollbottom = function (ID) {
-    ID.animate({ scrollTop: ID.prop("scrollHeight") }, 1000);
+    setTimeout(function () {
+        ID.animate({ scrollTop: ID.prop("scrollHeight") }, 1000);
+    },50);
+    
 };
 window.CloseChat = function (userID) {
     var id = $("#"+userID);

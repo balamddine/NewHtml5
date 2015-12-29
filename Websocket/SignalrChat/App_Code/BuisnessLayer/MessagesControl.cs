@@ -10,23 +10,25 @@ using System.Web;
 /// </summary>
 public class MessagesControl
 {
-   public List<Messages> GetAllMessages()
-   {
+    public List<Messages> GetAllMessages()
+    {
         List<Messages> L = new List<Messages>();
         Messages Message = null;
         SqlDataReader rdr = Provider.DataAccessConcrete().GetAllMessages();
-        while (rdr.Read()) {
+        while (rdr.Read())
+        {
             Message = new Messages();
             Message.ID = long.Parse(rdr["ID"].ToString());
             Message.Message = rdr["Message"].ToString();
-            Message.Status = rdr[ "Status"].ToString();
+            Message.Status = rdr["Status"].ToString();
             Message.ToID = long.Parse(rdr["ToID"].ToString());
             Message.FromID = long.Parse(rdr["FromID"].ToString());
             Message.DateSend = DateTime.Parse(rdr["DateSend"].ToString());
             L.Add(Message);
         }
+        rdr.Close();
         return L;
-   }
+    }
 
     public Messages GetMessageByID(long ID)
     {
@@ -42,11 +44,11 @@ public class MessagesControl
             Message.FromID = long.Parse(rdr["FromID"].ToString());
             Message.DateSend = DateTime.Parse(rdr["DateSend"].ToString());
         }
-
+        rdr.Close();
         return Message;
     }
 
-    public List<Messages> GetMessagesByPaging(long pagesize,long startindex,long FromID,long ToID)
+    public List<Messages> GetMessagesByPaging(long pagesize, long startindex, long FromID, long ToID)
     {
         List<Messages> L = new List<Messages>();
         Messages Message = null;
@@ -62,8 +64,7 @@ public class MessagesControl
             Message.DateSend = DateTime.Parse(rdr["DateSend"].ToString());
             L.Add(Message);
         }
+        rdr.Close();
         return L;
     }
-
-  
 }
