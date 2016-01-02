@@ -48,6 +48,11 @@ public class MessagesControl
         return Message;
     }
 
+    public void AddMessage(Messages msg)
+    {
+        Provider.DataAccessConcrete().AddMessage(msg.FromID, msg.ToID, msg.Message, msg.Status);
+    }
+
     public List<Messages> GetMessagesByPaging(long pagesize, long startindex, long FromID, long ToID)
     {
         List<Messages> L = new List<Messages>();

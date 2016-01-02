@@ -25,7 +25,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#dv_info" id="ainfo"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<asp:Label ID="ltWelcome" runat="server"></asp:Label></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Sign out</a></li>
+                        <li><a href="javascript:logout();"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Sign out</a></li>
                     </ul>
                 </div>
             </div>

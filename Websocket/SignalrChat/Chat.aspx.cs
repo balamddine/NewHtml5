@@ -55,16 +55,16 @@ public partial class Chat : System.Web.UI.Page
             MessagesControl MyMessagesCtrl = new MessagesControl();
             List<Messages> MessagesL = new List<Messages>();
             MessagesL= MyMessagesCtrl.GetMessagesByPaging(pageSize,0,u.ID,ToId);
-           
+            Userrs Touser = new UserControl().GetUserByID(ToId);
             if (MessagesL.Count > 0)
             {
                 foreach (Messages Message in MessagesL)
                 {
-                    Userrs Touser = new UserControl().GetUserByID(Message.ToID);
+                   
                     if (Message.FromID == u.ID)
                         html += "<li>You: " + Message.Message+"</li>";
                     else
-                        html += "<li>"+Touser.Name + ": " + Message.Message+"</li>";
+                        html += "<li><span style='font-weight:bold'>"+Touser.Name + "</span>: " + Message.Message+"</li>";
                 }
             }
             

@@ -11,7 +11,15 @@ public partial class Login : System.Web.UI.Page
     Userrs Userr = new Userrs();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!IsPostBack)
+        {
+            if (Request.QueryString.Count > 0 && Request["lgtout"] != null && Request["lgtout"] != "")
+            {
+                Session["User"] = null;
+                Session.Abandon();
+            }
+        }
+        
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)

@@ -69,7 +69,20 @@ public class DataAccess
         return rdr;
     }
 
-   
+    public void AddMessage(long FromID, long ToID, string Message, string Status)
+    {
+        string query = "Insert Into messages(FromID,ToID,Message,Status,DateSend) values (@FromID,@ToID,@Message,@Status,@DateSend)";
+        SqlConnection con = new SqlConnection(ConnectionString);
+        con.Open();
+        SqlCommand cmd = new SqlCommand(query, con);
+        cmd.Parameters.Add(new SqlParameter("@FromID", FromID));
+        cmd.Parameters.Add(new SqlParameter("@ToID", ToID));
+        cmd.Parameters.Add(new SqlParameter("@Message", Message));
+        cmd.Parameters.Add(new SqlParameter("@Status", Status));
+        cmd.Parameters.Add(new SqlParameter("@DateSend", DateTime.Now));
+        cmd.ExecuteReader();
+        con.Close();
+    }
 
     public void UpdateUserContext(long ID, string ContextID)
     {
@@ -108,7 +121,7 @@ public class DataAccess
     }
     public SqlDataReader GetMessagesByPaging(long pagesize, long startindex,long FromID,long ToID)
     {
-        string query = "SELECT * FROM messages where (FromID=FromID and ToID=ToID or (FromID=ToID and ToID=FromID)) ORDER BY ID OFFSET @startindex ROWS FETCH NEXT @pagesize ROWS ONLY";
+        string query = "SELECT * FROM messages where (FromID=@FromID and ToID=@ToID or (FromID=@ToID and ToID=@FromID)) ORDER BY DateSend ASC OFFSET @startindex ROWS FETCH NEXT @pagesize ROWS ONLY";
         SqlConnection con = new SqlConnection(ConnectionString);
         con.Open();
         SqlCommand cmd = new SqlCommand(query, con);
