@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Demo</title>
+    <meta charset="utf-8" />
+
+    
+    <style type="text/css">
+        #MyCanvas {
+            border:1px solid black;
+            background-color:black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="MyCanvas" ></canvas>
+    <script src="js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript">
+        var cv, ctx, x, y, cw, ch, w, h,fps,speed;
+        function init() {
+            cv = document.getElementById("MyCanvas");
+            ctx = cv.getContext("2d");
+            cw = 500;
+            ch = 500;
+            cv.width = cw
+            cv.height = ch
+            speed = 0.5;
+            w = 100;
+            h = 10;
+            x =cw/2;
+            y = ch/2;
+            fps = 60;
+            draw();
+        }
+        function draw() {
+            ctx.clearRect(0, 0, cw, ch);
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(x, y, w, h);
+
+        }
+        function update() {
+
+            if (((x + w) >= cw) || (x <= 0)) {
+                speed *= -1;
+            }
+            x += speed;
+            draw();
+        }
+        init();
+
+        setInterval(function () {
+            update();
+        }, fps / 1000);
+    </script>
+</body>
+
+</html>
