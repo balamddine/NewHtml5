@@ -9,6 +9,6 @@
   <li> Un example d'un chat utilisant le framework Signal-R pour asp.net avec explication du cette library  </li>
 </ul>
 
-<span style="font-size:12px">Cette presentation sera faitte par <b>Bassem.A.Alameddine</b> dans le cours du smb214</span>
-
+<span style="font-size:12px">Cette presentation sera faitte par <b>Bassem.A.Alameddine</b> dans le cours du smb214</span><br/>
+<b>ID CNAM: </b>1063t
 Ensseigner par <b>Dr.Pascal Fares</b>
